@@ -1,0 +1,10 @@
+mixin video(data)
+  div 
+      h4 
+        a(href=`/videos/${data.id}`)=data.title  
+      p=data.description 
+      small=data.createdAt
+      ul
+        each hashtag in data.hashtags 
+          li=hashtag
+      hr
