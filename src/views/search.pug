@@ -3,11 +3,14 @@ include mixins/video
 
 block content 
   
-  form(method="GET") 
+  form(method="GET").search__form 
     input(placeholder="Search by Title", type="text", name="keyword")
-    input(type="submit" value="Search")
-  div 
+    button
+      i.fa.fa-search
+  div.video-grid 
     each video in videos 
-      +video(video)  
+      +video(video)
+    else 
+      span.empty_message No videos yet  
 
 

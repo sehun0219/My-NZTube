@@ -13,10 +13,9 @@ block content
     input(type="text", name="username", placeholder="Username", required)
     input(type="password", name="password", placeholder="Password", required)
     input(type="password", name="password2", placeholder="Confirm Password", required)
-    input(type="text", name="location", placeholder="location")
-    input(type="submit", value="Join Now")
-
-  hr
-  div 
+    input(type="text", name="location", placeholder="Location")
+    input(type="submit", value="Join")
+    include partials/social-login.pug
+  div.auth-switch 
     span Already have an account? 
     a(href="/login") Login in now &rarr;   

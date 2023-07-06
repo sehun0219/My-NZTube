@@ -4,7 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // entry + output
 
 module.exports = {
-  entry: "./src/client/js/main.js", // file which will be transformed
+  entry: {
+    main: "./src/client/js/main.js",
+    videoPlayer: "./src/client/js/videoPlayer.js",
+  }, // file which will be transformed
   mode: "development", // development or production
   output: {
     filename: "js/main.js", // name
