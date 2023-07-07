@@ -10,7 +10,7 @@ module.exports = {
   }, // file which will be transformed
   mode: "development", // development or production
   output: {
-    filename: "js/main.js", // name
+    filename: "js/[name].js", // name
     path: path.resolve(__dirname, "assets"), // storage
     clean: true, // clean the folder before build
   },
