@@ -1,16 +1,20 @@
 extends base
 
-
-
 block content 
+  //- div
+  //-   video#preview
+  //-   button#startBtn Recording ("mic and cam required")
   if errorMessage
     span=errorMessage
   form(method="POST", enctype="multipart/form-data")
     input(placeholder="Title", type="text", name="title", maxlength=80, required)
     input(placeholder="Description", type="text" name="description", minlength=20, required)
-    label(for="video") 
+    label(for="video") Video File
     input(type="file", accept="video/*", name="video", id="video", required)
+    label(for="thumbnail") Thumbnail Image
+    input(type="file", accept="image/*", name="thumbnail", id="thumbnail")
     input(placeholder="hashtags, separated by comma", type="text", name="hashtags", required)
     input(type="submit", value="Upload Video")
 
-
+block scripts
+  script(src="/assets/js/recorder.js")
