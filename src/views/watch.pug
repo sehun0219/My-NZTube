@@ -22,13 +22,15 @@ block content
 
     div.video__data
         p.video__title=video.title
+        br
         small.video__owner Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        br
         if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
+            a(href=`${video.id}/edit`) Edit Video Information &rarr;
             a(href=`${video.id}/delete`) Delete Video &rarr;
+        br
     if loggedIn
         div.video__add-comments
             form.video__comment-form#commentForm
@@ -40,7 +42,8 @@ block content
                 li.video__comment(data-id=comment.id)
                     i.fas.fa-comment
                     span  #{comment.text}
-                    span ❌     
+                    span #{" "} ❎ 
+    
                     
 block scripts
     script(src="/assets/js/videoPlayer.js")

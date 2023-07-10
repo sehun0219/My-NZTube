@@ -110,6 +110,15 @@ const handleEnded = () => {
     method: "POST",
   });
 };
+const handleVideoDimension = () => {
+  if (video.videoWidth > video.videoHeight) {
+    videoContainer.classList.add("landscape");
+    videoContainer.classList.remove("portrait");
+  } else {
+    videoContainer.classList.add("portrait");
+    videoContainer.classList.remove("landscape");
+  }
+};
 
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMuteClick);
@@ -122,3 +131,4 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 video.addEventListener("click", handleStopAndPlayClick);
+video.addEventListener("loadeddata", handleVideoDimension);

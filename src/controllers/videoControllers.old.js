@@ -1,12 +1,17 @@
+import { async } from "regenerator-runtime";
 import User from "../models/User";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({})
-    .sort({ createdAt: "desc" })
-    .populate("owner");
-  return res.render("home", { pageTitle: "Home", videos });
+  try {
+    const videos = await Video.find({})
+      .sort({ createdAt: "desc" })
+      .populate("owner");
+    return res.render("home", { pageTitle: "Home", videos });
+  } catch (error) {
+    return res.status(404, { error });
+  }
 };
 
 export const watch = async (req, res) => {
@@ -64,6 +69,7 @@ export const postUpload = async (req, res) => {
   } = req.session;
   const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
+  const { path: fileUrl } = req.file;
   try {
     const newVideo = await Video.create({
       title,
@@ -78,7 +84,6 @@ export const postUpload = async (req, res) => {
     user.save();
     return res.redirect("/");
   } catch (error) {
-    console.log(error);
     return res.status(400).render("upload", {
       pageTitle: "Upload Video",
       errorMessage: error._message,

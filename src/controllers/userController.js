@@ -2,6 +2,7 @@ import User from "../models/User";
 import Video from "../models/Video";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
+import flash from "express-flash";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -41,6 +42,7 @@ export const postJoin = async (req, res) => {
       password2,
       location,
     });
+    req.flash("info", "Account created. Please log in.");
     return res.redirect("/login");
   } catch (error) {
     return res.status(400).render("join", {
@@ -154,7 +156,6 @@ export const finishGithubLogin = async (req, res) => {
 };
 export const logout = (req, res) => {
   req.session.destroy();
-  req.flash("info", "Bye Bye");
   return res.redirect("/");
 };
 
@@ -204,8 +205,15 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
 
-  req.session.user = updatedUser;
-  return res.redirect("/users/edit");
+  if (!updatedUser) {
+    return res.status(400).render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errorMessage: "Could not update profile",
+    });
+  } else {
+    req.session.user = updatedUser;
+    return res.redirect("/");
+  }
 };
 
 export const getChangePassword = (req, res) => {

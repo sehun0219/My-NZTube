@@ -3,7 +3,7 @@ include mixins/video
 
 block content 
   div.video-grid 
-    each data in videos
-      +video(data)
+    each video in videos
+      +video(video)
     else 
       span.empty_message No videos yet

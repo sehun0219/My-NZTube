@@ -18,6 +18,7 @@
 @import "./screens/profile.scss";
 @import "./screens/edit-profile.scss";
 @import "./screens/watch.scss";
+@import "./screens/upload.scss";
 
 // Default styles
 a {
@@ -43,4 +44,26 @@ main {
   font-size: 20px;
   margin-top: 20px;
   text-align: center;
+}
+footer {
+  background-color: #23272f;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-container a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-container a:hover {
+  text-decoration: underline;
 }
