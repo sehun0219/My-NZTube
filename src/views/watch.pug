@@ -19,9 +19,11 @@ block content
             div
                 span#fullScreen
                     i.fas.fa-expand
-
+    
     div.video__data
         p.video__title=video.title
+        br
+        p.video__description=video.description
         br
         small.video__owner Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
