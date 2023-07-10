@@ -10,13 +10,13 @@ module.exports = {
     recorder: BASE_JS + "recorder.js",
     commentSection: BASE_JS + "commentSection.js",
   }, // file which will be transformed
-  mode: "development", // development or production
+  // development or production
   output: {
     filename: "js/[name].js", // name
     path: path.resolve(__dirname, "assets"), // storage
     clean: true, // clean the folder before build
   },
-  watch: true, // watch for changes
+  // watch for changes
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/styles.css",
