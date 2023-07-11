@@ -166,37 +166,16 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id, avatarUrl: sessionAvatar },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
-    file: { path },
+    file,
   } = req;
-
-  const fieldsToUpdate = { email, username };
-  const updatePromises = [];
-
-  for (let [key, value] of Object.entries(fieldsToUpdate)) {
-    const user = User.findOne({ [key]: value }).exec();
-    updatePromises.push(user);
-  }
-  const users = await Promise.all(updatePromises);
-
-  const duplicateField = Object.keys(fieldsToUpdate).find((field, index) => {
-    const user = users[index];
-    return user && user._id.toString() !== _id.toString();
-  });
-
-  if (duplicateField) {
-    return res.status(400).render("edit-profile", {
-      pageTitle: "Edit Profile",
-      errorMessage: `This ${duplicateField} is already taken`,
-    });
-  }
-
+  const isHeroku = process.env.NODE_ENV === "production";
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: path ? path : req.session.user.avatarUrl,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       name,
       email,
       username,
@@ -204,16 +183,8 @@ export const postEdit = async (req, res) => {
     },
     { new: true }
   );
-
-  if (!updatedUser) {
-    return res.status(400).render("edit-profile", {
-      pageTitle: "Edit Profile",
-      errorMessage: "Could not update profile",
-    });
-  } else {
-    req.session.user = updatedUser;
-    return res.redirect("/");
-  }
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
 };
 
 export const getChangePassword = (req, res) => {
