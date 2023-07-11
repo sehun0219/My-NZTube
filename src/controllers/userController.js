@@ -1,8 +1,6 @@
 import User from "../models/User";
-import Video from "../models/Video";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
-import flash from "express-flash";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
