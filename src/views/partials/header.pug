@@ -11,15 +11,10 @@ header
       if loggedIn
         li 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
-              span 😁
-            else
-              if loggedInUser.avatarUrl
-                if loggedInUser.avatarUrl.includes("github")
-                  img.header__avatar(src=loggedInUser.avatarUrl)
-                else 
-                  img.header__avatar(src=loggedInUser.avatarUrl)
-            
+            if loggedInUser.avatarUrl
+              img.header__avatar(src=loggedInUser.avatarUrl)
+            else 
+              span= "Welcome!  " + loggedInUser.name
         li 
           a(href="/users/edit") Edit profile
         li 

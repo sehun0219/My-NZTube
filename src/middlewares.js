@@ -12,12 +12,14 @@ const multerUploader = multerS3({
   s3: s3,
   bucket: "mynztube",
   acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "MyNZTube";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
+  console.log("111", res.locals);
 
   next();
 };
