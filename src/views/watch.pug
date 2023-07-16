@@ -30,7 +30,7 @@ block content
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
         br
         if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video Information &rarr;
+            //- a(href=`${video.id}/edit`) Edit Video Information &rarr;
             a(href=`${video.id}/delete`) Delete Video &rarr;
         br
     if loggedIn
