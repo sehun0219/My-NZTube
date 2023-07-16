@@ -1,5 +1,4 @@
 Route
-
 / home
 /join
 /login
